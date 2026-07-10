@@ -17,8 +17,11 @@ const app = express();
 // Security & Parsing Middleware
 // ---------------------------------------------------------------------------
 app.use(helmet());
+const clientUrl = process.env.CLIENT_URL;
+const allowedOrigin = clientUrl ? clientUrl.replace(/\/$/, '') : 'http://localhost:5173';
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: allowedOrigin,
   credentials: true,
 }));
 app.use(express.json({ limit: '10kb' }));
