@@ -104,13 +104,13 @@ npm run dev
 ```
 The app will be running at `http://localhost:5173`.
 
-## 🔐 Role Based Access & API Documentation
+## 🔐 Role-Based Access (User vs Admin) & API Documentation
 
 The system utilizes JWT stored in localStorage and attached via Axios interceptors. 
 
 ### Roles
-- **USER:** Can book tables, view own history, and cancel own pending/confirmed bookings.
-- **ADMIN:** Can view all reservations, view dashboard stats, change reservation status, modify booking times, and manage (CRUD) the physical table inventory.
+- **USER (Customer):** Can book tables, view own history, and cancel own pending/confirmed bookings.
+- **ADMIN (Administrator):** Can view all reservations, view dashboard stats, change reservation status, modify booking times, and manage (CRUD) the physical table inventory.
 
 ### API Endpoints
 **Auth**
@@ -135,7 +135,18 @@ The system utilizes JWT stored in localStorage and attached via Axios intercepto
 **Public**
 - `GET /api/tables` - List available tables (auth required, but accessible to users)
 
-## 🧠 Reservation Algorithm
+---
+
+## 📝 Assumptions Made
+
+1. **Single Restaurant Focus**: The system is designed around a single restaurant layout with a fixed, configurable number of physical tables.
+2. **Auto-Assignment of Tables**: Customers do not select their own tables during booking. The backend handles seating logic dynamically.
+3. **Fixed Dining Duration**: The default dining duration is assumed to be 2 hours, which automatically sets the reservation's end time.
+4. **Time Formats**: Operating hours are restricted between 17:00 and 23:30, defined in standard 24-hour `HH:MM` strings.
+
+---
+
+## 🧠 Explanation of Reservation and Availability Logic
 
 The core business logic resides in `src/services/reservation.service.js`.
 
@@ -145,6 +156,26 @@ When a `POST /api/reservations` request is received:
 3. **Check Overlap:** Iterate through the tables. For each table, query existing confirmed/pending reservations for that specific date.
 4. **Time Math:** Convert "HH:MM" strings to absolute minutes since midnight. Apply the overlap formula: `(existingStart < newEnd) && (existingEnd > newStart)`.
 5. **Assign or Reject:** The first table with zero overlaps is assigned. If all suitable tables have overlaps, a `409 Conflict` is returned gracefully.
+
+---
+
+## ⚠️ Known Limitations
+
+* **Single Location**: Does not support chain restaurants or multiple locations.
+* **Storage of Tokens**: JWT tokens are currently stored in `localStorage` rather than HTTP-only cookies, which is acceptable for an assignment but susceptible to XSS.
+* **In-Memory Search Filtering**: Admin dashboard queries load reservation records and filter customer search terms in-memory on the Node server rather than executing database-level aggregations.
+* **No Real-Time Conflict Alerts**: If two users attempt to book the last free table at the exact same millisecond, the second query might bypass the search step before the first writes to the DB (solvable with Mongoose transactions or unique compound indexes).
+
+---
+
+## 🔮 Areas for Improvement with Additional Time
+
+* **Email Notifications:** Integrate SendGrid/Resend to email customers upon confirmation/cancellation.
+* **Real-time Updates:** Add Socket.io so the Admin dashboard updates live when a customer books a table.
+* **Stripe Integration:** Require a deposit for reservations of 8+ people.
+* **Database Aggregation**: Optimize search endpoints using native MongoDB search/aggregation pipelines.
+
+---
 
 ## 🚢 Deployment
 
@@ -162,8 +193,3 @@ When a `POST /api/reservations` request is received:
 4. Build Command: `npm run build`
 5. Output Directory: `dist`
 6. Add Environment Variable: `VITE_API_URL=https://your-backend-url.onrender.com/api`
-
-## 🔮 Future Improvements
-- **Email Notifications:** Integrate SendGrid/Resend to email customers upon confirmation/cancellation.
-- **Real-time Updates:** Add Socket.io so the Admin dashboard updates live when a customer books a table.
-- **Stripe Integration:** Require a deposit for reservations of 8+ people.
