@@ -37,7 +37,7 @@ export const Layout = () => {
       <aside className="hidden md:flex flex-col w-64 bg-dark-800 border-r border-dark-700 h-screen sticky top-0">
         <div className="p-6 flex items-center space-x-3">
           <div className="bg-gradient-brand p-2 rounded-xl">
-            <UtensilsCrossed className="w-6 h-6 text-white" />
+            <UtensilsCrossed className="w-6 h-6 text-pure-white" />
           </div>
           <span className="text-xl font-bold tracking-tight text-white">TableMate</span>
         </div>
@@ -83,7 +83,7 @@ export const Layout = () => {
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center space-x-2">
              <div className="bg-gradient-brand p-1.5 rounded-lg">
-              <UtensilsCrossed className="w-5 h-5 text-white" />
+              <UtensilsCrossed className="w-5 h-5 text-pure-white" />
             </div>
             <span className="text-lg font-bold text-white">TableMate</span>
           </div>

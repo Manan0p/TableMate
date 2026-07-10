@@ -43,7 +43,7 @@ const StatCard = ({ title, value, icon: Icon, color, delay }: { title: string, v
         <p className="text-3xl font-bold text-white mt-2">{value}</p>
       </div>
       <div className={`p-4 rounded-xl ${color}`}>
-        <Icon className="w-6 h-6 text-white" />
+        <Icon className="w-6 h-6 text-pure-white" />
       </div>
     </div>
   </motion.div>
@@ -131,22 +131,22 @@ const AdminDashboard = () => {
                     <stop offset="95%" stopColor="#e8562a" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#2c2c3e" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
                 <XAxis 
                   dataKey="date" 
-                  stroke="#71717a" 
-                  tick={{ fill: '#71717a' }}
+                  stroke="#64748b" 
+                  tick={{ fill: '#64748b' }}
                   tickLine={false}
                   axisLine={false}
                 />
                 <YAxis 
-                  stroke="#71717a" 
-                  tick={{ fill: '#71717a' }}
+                  stroke="#64748b" 
+                  tick={{ fill: '#64748b' }}
                   tickLine={false}
                   axisLine={false}
                 />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#1a1a24', border: '1px solid #2c2c3e', borderRadius: '12px' }}
+                  contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', color: '#1e293b' }}
                   itemStyle={{ color: '#e8562a' }}
                 />
                 <Area 

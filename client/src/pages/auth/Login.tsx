@@ -21,9 +21,19 @@ const Login = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>({
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
   });
+
+  const autofillCustomer = () => {
+    setValue('email', 'customer@example.com', { shouldValidate: true });
+    setValue('password', 'password123', { shouldValidate: true });
+  };
+
+  const autofillAdmin = () => {
+    setValue('email', 'admin@example.com', { shouldValidate: true });
+    setValue('password', 'password123', { shouldValidate: true });
+  };
 
   const onSubmit = async (data: LoginForm) => {
     try {
@@ -56,7 +66,7 @@ const Login = () => {
           className="flex justify-center"
         >
           <div className="bg-gradient-brand p-3 rounded-2xl shadow-brand-lg">
-            <UtensilsCrossed className="w-10 h-10 text-white" />
+            <UtensilsCrossed className="w-10 h-10 text-pure-white" />
           </div>
         </motion.div>
         <motion.h2 
@@ -105,6 +115,23 @@ const Login = () => {
                 placeholder="••••••••"
               />
               {errors.password && <p className="mt-2 text-sm text-red-400">{errors.password.message}</p>}
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 pt-2">
+              <button
+                type="button"
+                onClick={autofillCustomer}
+                className="btn-secondary text-xs py-2 px-3 text-center border-dashed"
+              >
+                Customer
+              </button>
+              <button
+                type="button"
+                onClick={autofillAdmin}
+                className="btn-secondary text-xs py-2 px-3 text-center border-dashed"
+              >
+                Admin
+              </button>
             </div>
 
             <button

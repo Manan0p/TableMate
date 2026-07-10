@@ -59,7 +59,7 @@ const CustomerDashboard = () => {
                 
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="bg-gradient-brand p-4 rounded-2xl shadow-brand-md">
-                    <UtensilsCrossed className="w-8 h-8 text-white" />
+                    <UtensilsCrossed className="w-8 h-8 text-pure-white" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white">TableMate Restaurant</h3>

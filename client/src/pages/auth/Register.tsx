@@ -53,7 +53,7 @@ const Register = () => {
           className="flex justify-center"
         >
           <div className="bg-gradient-brand p-3 rounded-2xl shadow-brand-lg">
-            <UtensilsCrossed className="w-10 h-10 text-white" />
+            <UtensilsCrossed className="w-10 h-10 text-pure-white" />
           </div>
         </motion.div>
         <motion.h2 

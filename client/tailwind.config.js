@@ -8,6 +8,8 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
+        white: '#1e293b', // Redefine white to be Slate-800 for dark text by default
+        'pure-white': '#ffffff', // For elements that must remain white
         brand: {
           50:  '#fdf4f0',
           100: '#fce8dc',
@@ -22,23 +24,25 @@ export default {
           950: '#3f100a',
         },
         dark: {
-          900: '#0d0d12',
-          800: '#13131a',
-          700: '#1a1a24',
-          600: '#22222f',
-          500: '#2c2c3e',
-          400: '#3d3d55',
+          900: '#f8fafc', // Slate-50 body background
+          800: '#ffffff', // Pure white card/input background
+          700: '#f1f5f9', // Slate-100 muted nested background
+          600: '#e2e8f0', // Slate-200 primary border color
+          500: '#cbd5e1', // Slate-300 secondary border/hover color
+          400: '#64748b', // Slate-500 muted text
+          300: '#334155', // Slate-700 secondary text
+          200: '#1e293b', // Slate-800 primary text
         },
       },
       backgroundImage: {
         'gradient-brand': 'linear-gradient(135deg, #e8562a 0%, #d9401f 100%)',
-        'gradient-dark':  'linear-gradient(135deg, #1a1a24 0%, #0d0d12 100%)',
+        'gradient-dark':  'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
       },
       boxShadow: {
-        'brand-sm': '0 2px 8px rgba(232, 86, 42, 0.25)',
-        'brand-md': '0 4px 20px rgba(232, 86, 42, 0.35)',
-        'brand-lg': '0 8px 40px rgba(232, 86, 42, 0.45)',
-        'glass':    '0 8px 32px rgba(0, 0, 0, 0.4)',
+        'brand-sm': '0 2px 8px rgba(232, 86, 42, 0.15)',
+        'brand-md': '0 4px 20px rgba(232, 86, 42, 0.2)',
+        'brand-lg': '0 8px 40px rgba(232, 86, 42, 0.25)',
+        'glass':    '0 8px 32px rgba(15, 23, 42, 0.05)',
       },
       animation: {
         'fade-in':    'fadeIn 0.3s ease-out',

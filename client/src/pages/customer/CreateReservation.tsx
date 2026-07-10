@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -45,14 +45,12 @@ const CreateReservation = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<ReservationForm>({
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<ReservationForm>({
     resolver: zodResolver(reservationSchema),
     defaultValues: {
       guestCount: 2,
     }
   });
-
-  const startTime = watch('startTime');
 
   // Helper to auto-set end time to 2 hours after start time (common dining duration)
   const handleStartTimeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
