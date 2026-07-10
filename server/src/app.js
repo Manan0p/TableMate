@@ -31,8 +31,16 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // ---------------------------------------------------------------------------
-// Health Check
+// Welcome & Health Check Routes
 // ---------------------------------------------------------------------------
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Welcome to the TableMate API. Refer to the documentation to access endpoints.',
+    health: `${req.protocol}://${req.get('host')}/health`
+  });
+});
+
 app.get('/health', (req, res) => {
   res.status(200).json({
     success: true,
